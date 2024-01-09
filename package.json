@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "plotly.js-dist-min": "^2.28.0",
-    "sass": "^1.69.6",
-    "vue": "^3.3.11",
+    "sass": "^1.69.7",
+    "vue": "^3.4.7",
     "vue-router": "4"
   },
   "devDependencies": {
@@ -22,15 +22,15 @@
     "@types/eslint__eslintrc": "^2.1.1",
     "@types/eslint__js": "^8.42.3",
     "@types/plotly.js-dist-min": "^2.3.4",
-    "@typescript-eslint/eslint-plugin": "^6.16.0",
-    "@typescript-eslint/parser": "^6.16.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
     "@vitejs/plugin-vue": "^5.0.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-vue": "^9.19.2",
     "prettier": "^3.1.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8",
-    "vue-tsc": "^1.8.25"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vue-tsc": "^1.8.27"
   }
 }
