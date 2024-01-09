@@ -1,16 +1,21 @@
 <script setup lang="ts">
-import Plotly from 'plotly.js-dist-min'
-import { onMounted, ref } from 'vue'
+import type { Data, Layout, Config } from 'plotly.js-dist-min'
+import { newPlot } from 'plotly.js-dist-min'
+import { onMounted, ref, watchEffect } from 'vue'
 
 const props = defineProps<{
-  data: Plotly.Data[]
-  layout?: Partial<Plotly.Layout>
-  config?: Partial<Plotly.Config>
+  data: Data[]
+  layout?: Partial<Layout>
+  config?: Partial<Config>
 }>()
 const graph = ref<HTMLDivElement>()
 onMounted(() => {
   if (!graph.value) return
-  Plotly.newPlot(graph.value, props.data, props.layout, props.config)
+  newPlot(graph.value, props.data, props.layout, props.config)
+})
+watchEffect(() => {
+  if (!graph.value) return
+  newPlot(graph.value, props.data, props.layout, props.config)
 })
 </script>
 <template>
