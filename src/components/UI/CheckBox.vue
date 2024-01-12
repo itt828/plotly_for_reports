@@ -2,7 +2,7 @@
 defineProps<{
   label: string
 }>()
-const model = defineModel<string>()
+const model = defineModel<boolean>()
 </script>
 <template>
   <label>
