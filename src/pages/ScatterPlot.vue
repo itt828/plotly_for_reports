@@ -3,14 +3,7 @@ import type { Config, Layout } from 'plotly.js-dist-min'
 import { Ref, ref } from 'vue'
 import PlotlyGraph from '../components/PlotlyGraph.vue'
 import PlotDataCard from '../components/PlotDataCard.vue'
-
-type Scatter = {
-  type: 'scatter'
-  mode: 'markers' | 'lines'
-  x: number[]
-  y: number[]
-  line: { shape: 'spline' }
-}
+import { Scatter } from '/@/types'
 
 const data: Ref<Scatter[]> = ref([
   {

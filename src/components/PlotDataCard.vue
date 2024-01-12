@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { xyFromCsv, xyToCsv } from '/@/utils/xyCsv'
+import { Scatter } from '/@/types'
+import CheckBox from './UI/CheckBox.vue'
+import RadioButton from './UI/RadioButton.vue'
 
-const model = defineModel<{
-  x: number[]
-  y: number[]
-  type: 'scatter'
-  mode: 'markers' | 'lines' | 'lines+markers'
-  line: {
-    shape: 'spline' | 'linear'
-  }
-}>({
+const model = defineModel<Scatter>({
   default: {
     x: [],
     y: [],
@@ -34,42 +29,37 @@ const xyRaw = computed({
 <template>
   <div :class="$style.editor">
     <div>
-      <textarea v-model="xyRaw" />
+      <textarea v-model="xyRaw" :class="$style.textarea" />
     </div>
-    <div>
-      <input id="lines" v-model="model.mode" type="radio" value="lines" />
-      <label for="lines">ライン</label>
-      <input id="markers" v-model="model.mode" type="radio" value="markers" />
-      <label for="markers">マーカー</label>
-      <input
-        id="lines+markers"
-        v-model="model.mode"
-        type="radio"
-        value="lines+markers"
-      />
-      <label for="lines+markers">ライン+マーカー</label>
-    </div>
-    <div>
-      <input
-        id="linear"
-        v-model="model.line.shape"
-        type="radio"
-        value="linear"
-      />
-      <label for="linear">直線</label>
-      <input
-        id="spline"
-        v-model="model.line.shape"
-        type="radio"
-        value="spline"
-      />
-      <label for="spline">平滑線</label>
+    <div :class="$style.plotConfig">
+      <p>線 and/or 点</p>
+      <div>
+        <CheckBox label="ライン" />
+        <CheckBox label="マーカー" />
+      </div>
+      <p>線の種類</p>
+      <div>
+        <RadioButton v-model="model.line.shape" label="直線" value="linear" />
+        <RadioButton v-model="model.line.shape" label="平滑線" value="spline" />
+      </div>
     </div>
   </div>
 </template>
 <style lang="scss" module>
 .editor {
   display: flex;
+  flex-direction: row;
+  padding: 16px;
+  border-radius: 16px;
+  background-color: rgba(#ffffff, 0.1);
+  box-shadow: 0px 4px 12px 0px rgba(#000000, 0.2);
+}
+.plotConfig {
+  display: flex;
   flex-direction: column;
+  align-items: left;
+}
+.textarea {
+  height: 100%;
 }
 </style>
