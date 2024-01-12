@@ -13,15 +13,8 @@ const data: Ref<Scatter[]> = ref([
     x: [1, 4, 3, 25, 6],
     y: [2, 2, 10, 9, 23],
     line: { shape: 'spline' },
-    show: true
-  },
-  {
-    type: 'scatter',
-    mode: 'lines',
-    x: [1, 4, 3, 25, 6],
-    y: [2, 2, 10, 9, 23],
-    line: { shape: 'spline' },
-    show: true
+    show: true,
+    color: '#000000'
   }
 ])
 const graphConfig: Ref<GraphConfig> = ref({
@@ -33,7 +26,15 @@ const graphConfig: Ref<GraphConfig> = ref({
   }
 })
 
-const dataShow = computed(() => data.value.filter((v) => v.show))
+const dataShow = computed(() =>
+  data.value
+    .filter((v) => v.show)
+    .map((v) => ({
+      ...v,
+      marker: { color: v.color },
+      line: { shape: v.line.shape, color: v.color }
+    }))
+)
 
 const addData = () => {
   data.value = [
@@ -44,7 +45,8 @@ const addData = () => {
       x: [1, 4, 3, 25, 6],
       y: [2, 2, 10, 9, 23],
       line: { shape: 'spline' },
-      show: true
+      show: true,
+      color: '#000000'
     }
   ]
 }

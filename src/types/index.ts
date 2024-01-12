@@ -4,6 +4,7 @@ export type Scatter = {
   x: number[]
   y: number[]
   line: { shape: 'spline' | 'linear' }
+  color: string
   show: boolean
 }
 

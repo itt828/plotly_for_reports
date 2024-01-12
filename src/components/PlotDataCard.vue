@@ -16,7 +16,8 @@ const model = defineModel<Scatter>({
     mode: 'markers',
     type: 'scatter',
     line: { shape: 'spline' },
-    show: true
+    show: true,
+    color: '#000000'
   }
 })
 const xyRaw = ref('')
@@ -93,6 +94,10 @@ const onClose = () => {
             value="spline"
           />
         </div>
+      </div>
+      <div :class="$style.item">
+        色
+        <input v-model="model.color" type="color" />
       </div>
     </div>
     <button :class="$style.deleteButton" @click="onClose">X</button>
