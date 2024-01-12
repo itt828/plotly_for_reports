@@ -9,27 +9,27 @@ const model = defineModel<GraphConfig>({ default: {} })
       軸タイトル
       <input v-model="model.x.title" />
     </div>
-    <div :class="$style.item">
+    <!-- <div :class="$style.item">
       最小値
       <input v-model="model.x.min" type="number" />
     </div>
     <div :class="$style.item">
       最大値
       <input v-model="model.x.max" type="number" />
-    </div>
+    </div> -->
     y軸
     <div :class="$style.item">
       軸タイトル
       <input v-model="model.y.title" />
     </div>
-    <div :class="$style.item">
+    <!-- <div :class="$style.item">
       最小値
       <input v-model="model.y.min" type="number" />
     </div>
     <div :class="$style.item">
       最大値
       <input v-model="model.y.max" type="number" />
-    </div>
+    </div> -->
   </div>
 </template>
 <style lang="scss" module>

@@ -81,13 +81,13 @@ const deleteData = (i: number) => {
 watchEffect(() => {
   layout.value.xaxis = {
     ...layout.value.xaxis,
-    title: graphConfig.value.x.title,
-    range: [graphConfig.value.x.min, graphConfig.value.x.max]
+    title: graphConfig.value.x.title
+    // range: [graphConfig.value.x.min, graphConfig.value.x.max]
   }
   layout.value.yaxis = {
     ...layout.value.yaxis,
-    title: graphConfig.value.y.title,
-    range: [graphConfig.value.y.min, graphConfig.value.y.max]
+    title: graphConfig.value.y.title
+    // range: [graphConfig.value.y.min, graphConfig.value.y.max]
   }
 })
 </script>
