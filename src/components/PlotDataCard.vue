@@ -20,9 +20,10 @@ const model = defineModel<Scatter>({
     color: '#000000'
   }
 })
+const column = ref({ x: 0, y: 1 })
 const xyRaw = ref('')
 watchEffect(() => {
-  const result = xyFromCsv(xyRaw.value)
+  const result = xyFromCsv(xyRaw.value, column.value.x, column.value.y)
   if (!result) return
   model.value.x = result.x
   model.value.y = result.y
@@ -98,6 +99,11 @@ const onClose = () => {
       <div :class="$style.item">
         色
         <input v-model="model.color" type="color" />
+      </div>
+      <div :class="$style.item">
+        列
+        <div>x: <input v-model="column.x" type="number" /></div>
+        <div>y: <input v-model="column.y" type="number" /></div>
       </div>
     </div>
     <button :class="$style.deleteButton" @click="onClose">X</button>
