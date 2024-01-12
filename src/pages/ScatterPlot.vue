@@ -61,7 +61,8 @@ const layout: Ref<Partial<Layout>> = ref({
     linecolor: '#000000',
     showline: true,
     zeroline: false,
-    range: [0, 30]
+    range: [0, 30],
+    showgrid: false
   },
   yaxis: {
     title: 'fuga',
@@ -71,7 +72,8 @@ const layout: Ref<Partial<Layout>> = ref({
     linecolor: '#000000',
     showline: true,
     zeroline: false,
-    range: [0, 30]
+    range: [0, 30],
+    showgrid: false
   }
 })
 const config: Partial<Config> = {}
