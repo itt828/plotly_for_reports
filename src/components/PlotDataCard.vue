@@ -69,7 +69,8 @@ const onClose = () => {
 
 <template>
   <div :class="$style.editor">
-    <div>
+    <div :class="$style.item">
+      CSV
       <textarea v-model="xyRaw" :class="$style.textarea" />
     </div>
     <div :class="$style.plotConfig">
