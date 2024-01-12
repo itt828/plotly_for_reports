@@ -1,23 +1,47 @@
 <script setup lang="ts">
-import type { Config, Data, Layout } from 'plotly.js-dist-min'
-import { Ref, computed, ref, watch } from 'vue'
-import { parse } from 'csv-parse/browser/esm/sync'
+import type { Config, Layout } from 'plotly.js-dist-min'
+import { Ref, ref } from 'vue'
 import PlotlyGraph from '../components/PlotlyGraph.vue'
+import PlotDataCard from '../components/PlotDataCard.vue'
 
-const data: Ref<Data[]> = ref([
+type Scatter = {
+  type: 'scatter'
+  mode: 'markers' | 'lines'
+  x: number[]
+  y: number[]
+  line: { shape: 'spline' }
+}
+
+const data: Ref<Scatter[]> = ref([
   {
     type: 'scatter',
     mode: 'markers',
     x: [1, 4, 3, 25, 6],
-    y: [2, 2, 10, 9, -3]
+    y: [2, 2, 10, 9, 23],
+    line: { shape: 'spline' }
   },
   {
     type: 'scatter',
     mode: 'lines',
     x: [1, 4, 3, 25, 6],
-    y: [2, 2, 10, 9, -3]
+    y: [2, 2, 10, 9, 23],
+    line: { shape: 'spline' }
   }
 ])
+
+const addData = () => {
+  data.value = [
+    ...data.value,
+    {
+      type: 'scatter',
+      mode: 'markers',
+      x: [1, 4, 3, 25, 6],
+      y: [2, 2, 10, 9, 23],
+      line: { shape: 'spline' }
+    }
+  ]
+}
+
 const layout: Ref<Partial<Layout>> = ref({
   paper_bgcolor: '#ffffff',
   plot_bgcolor: '#ffffff',
@@ -30,7 +54,7 @@ const layout: Ref<Partial<Layout>> = ref({
     linecolor: '#000000',
     showline: true,
     zeroline: false,
-    range: [0, 100]
+    range: [0, 30]
   },
   yaxis: {
     title: 'fuga',
@@ -40,36 +64,19 @@ const layout: Ref<Partial<Layout>> = ref({
     linecolor: '#000000',
     showline: true,
     zeroline: false,
-    range: [0, 100]
+    range: [0, 30]
   }
 })
 const config: Partial<Config> = {}
-const xyRaw = ref('')
-const xy = computed(() => {
-  try {
-    const records = parse(xyRaw.value)
-    if (!records.every((v) => v.length == 2)) return
-    const x: number[] = records.map((v) => Number(v[0]))
-    const y: number[] = records.map((v) => Number(v[1]))
-    return { x, y }
-  } catch (error) {
-    return undefined
-  }
-})
-watch(xyRaw, () => {
-  if (!xy.value) return
-  data.value = [
-    {
-      ...xy.value
-    }
-  ]
-})
 </script>
 <template>
   <div :class="$style.container">
     <PlotlyGraph :data="data" :layout="layout" :config="config" />
-    <textarea v-model="xyRaw" :class="$style.textarea"></textarea>
-    {{ xy }}
+    <div v-for="(_datum, i) in data" :key="i" :class="$style.item">
+      <PlotDataCard v-model="data[i]" />
+      <button :class="$style.deleteButton">X</button>
+    </div>
+    <button @click="addData">追加</button>
   </div>
 </template>
 <style module lang="scss">
@@ -82,5 +89,14 @@ watch(xyRaw, () => {
 .textarea {
   width: 100px;
   height: 40px;
+}
+.item {
+  display: flex;
+}
+.deleteButton {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
 }
 </style>
